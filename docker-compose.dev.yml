@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL数据库（开发环境）
+  postgres-dev:
+    image: postgres:15-alpine
+    container_name: rag-chat-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-rag_chat_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    networks:
+      - rag-chat-dev-network
+
+  # Redis缓存（开发环境）
+  redis-dev:
+    image: redis:7-alpine
+    container_name: rag-chat-redis-dev
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - rag-chat-dev-network
+
+  # 开发环境应用（使用热重载）
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: rag-chat-app-dev
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres-dev:5432/${POSTGRES_DB:-rag_chat_dev}
+      - REDIS_URL=redis://redis-dev:6379
+      - UPSTASH_VECTOR_REST_URL=${UPSTASH_VECTOR_REST_URL}
+      - UPSTASH_VECTOR_REST_TOKEN=${UPSTASH_VECTOR_REST_TOKEN}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-http://localhost:3001}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "${APP_PORT:-3001}:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - postgres-dev
+      - redis-dev
+    networks:
+      - rag-chat-dev-network
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+
+networks:
+  rag-chat-dev-network:
+    driver: bridge
