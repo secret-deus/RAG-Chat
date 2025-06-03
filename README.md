@@ -3,26 +3,26 @@
 ## 快速开始
 
 ### 1. 克隆项目
-\`\`\`bash
+```bash
 git clone <repository-url>
 cd rag-chat-app
-\`\`\`
+```
 
 ### 2. 配置环境变量
-\`\`\`bash
+```bash
 cp .env.example .env
 # 编辑 .env 文件，配置必要的环境变量
-\`\`\`
+```
 
 ### 3. 启动应用
-\`\`\`bash
+```bash
 # 生产环境
 chmod +x scripts/deploy.sh
 ./scripts/deploy.sh
 
 # 或者手动启动
 docker-compose up -d
-\`\`\`
+```
 
 ### 4. 访问应用
 - 应用地址: http://localhost:3000
@@ -32,13 +32,13 @@ docker-compose up -d
 ## 开发环境
 
 ### 启动开发环境
-\`\`\`bash
+```bash
 chmod +x scripts/dev.sh
 ./scripts/dev.sh
 
 # 或者手动启动
 docker-compose -f docker-compose.dev.yml up -d
-\`\`\`
+```
 
 ### 开发环境地址
 - 应用地址: http://localhost:3001
@@ -48,56 +48,56 @@ docker-compose -f docker-compose.dev.yml up -d
 ## 服务管理
 
 ### 查看服务状态
-\`\`\`bash
+```bash
 docker-compose ps
-\`\`\`
+```
 
 ### 查看日志
-\`\`\`bash
+```bash
 # 查看所有服务日志
 docker-compose logs
 
 # 查看特定服务日志
 docker-compose logs app
 docker-compose logs postgres
-\`\`\`
+```
 
 ### 停止服务
-\`\`\`bash
+```bash
 docker-compose down
-\`\`\`
+```
 
 ### 重启服务
-\`\`\`bash
+```bash
 docker-compose restart
-\`\`\`
+```
 
 ## 数据管理
 
 ### 备份数据
-\`\`\`bash
+```bash
 chmod +x scripts/backup.sh
 ./scripts/backup.sh
-\`\`\`
+```
 
 ### 恢复数据
-\`\`\`bash
+```bash
 # 从备份文件恢复
 gunzip backups/rag_chat_backup_YYYYMMDD_HHMMSS.sql.gz
 docker-compose exec -T postgres psql -U postgres rag_chat < backups/rag_chat_backup_YYYYMMDD_HHMMSS.sql
-\`\`\`
+```
 
 ### 数据库迁移
-\`\`\`bash
+```bash
 docker-compose exec app npx drizzle-kit push:pg
-\`\`\`
+```
 
 ## 监控
 
 ### 启动监控服务
-\`\`\`bash
+```bash
 docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
-\`\`\`
+```
 
 ### 访问监控界面
 - Prometheus: http://localhost:9090
@@ -124,7 +124,7 @@ docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
    - 确认文件大小限制
 
 ### 重置环境
-\`\`\`bash
+```bash
 # 停止所有服务
 docker-compose down
 
@@ -133,7 +133,7 @@ docker-compose down -v
 
 # 重新启动
 docker-compose up -d
-\`\`\`
+```
 
 ## 生产环境建议
 
