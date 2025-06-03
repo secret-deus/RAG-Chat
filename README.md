@@ -15,18 +15,17 @@ RAG Chat 是一个基于检索增强生成（Retrieval Augmented Generation）�
 ## 2. 系统架构
 
 ```mermaid
-系统架构图.download-icon {
-            cursor: pointer;
-            transform-origin: center;
-        }
-        .download-icon .arrow-part {
-            transition: transform 0.35s cubic-bezier(0.35, 0.2, 0.14, 0.95);
-             transform-origin: center;
-        }
-        button:has(.download-icon):hover .download-icon .arrow-part, button:has(.download-icon):focus-visible .download-icon .arrow-part {
-          transform: translateY(-1.5px);
-        }
-        #mermaid-diagram-rqi{font-family:var(--font-geist-sans);font-size:12px;fill:#000000;}#mermaid-diagram-rqi .error-icon{fill:#552222;}#mermaid-diagram-rqi .error-text{fill:#552222;stroke:#552222;}#mermaid-diagram-rqi .edge-thickness-normal{stroke-width:1px;}#mermaid-diagram-rqi .edge-thickness-thick{stroke-width:3.5px;}#mermaid-diagram-rqi .edge-pattern-solid{stroke-dasharray:0;}#mermaid-diagram-rqi .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-diagram-rqi .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-diagram-rqi .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-diagram-rqi .marker{fill:#666;stroke:#666;}#mermaid-diagram-rqi .marker.cross{stroke:#666;}#mermaid-diagram-rqi svg{font-family:var(--font-geist-sans);font-size:12px;}#mermaid-diagram-rqi p{margin:0;}#mermaid-diagram-rqi .label{font-family:var(--font-geist-sans);color:#000000;}#mermaid-diagram-rqi .cluster-label text{fill:#333;}#mermaid-diagram-rqi .cluster-label span{color:#333;}#mermaid-diagram-rqi .cluster-label span p{background-color:transparent;}#mermaid-diagram-rqi .label text,#mermaid-diagram-rqi span{fill:#000000;color:#000000;}#mermaid-diagram-rqi .node rect,#mermaid-diagram-rqi .node circle,#mermaid-diagram-rqi .node ellipse,#mermaid-diagram-rqi .node polygon,#mermaid-diagram-rqi .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-diagram-rqi .rough-node .label text,#mermaid-diagram-rqi .node .label text{text-anchor:middle;}#mermaid-diagram-rqi .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-diagram-rqi .node .label{text-align:center;}#mermaid-diagram-rqi .node.clickable{cursor:pointer;}#mermaid-diagram-rqi .arrowheadPath{fill:#333333;}#mermaid-diagram-rqi .edgePath .path{stroke:#666;stroke-width:2.0px;}#mermaid-diagram-rqi .flowchart-link{stroke:#666;fill:none;}#mermaid-diagram-rqi .edgeLabel{background-color:white;text-align:center;}#mermaid-diagram-rqi .edgeLabel p{background-color:white;}#mermaid-diagram-rqi .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-diagram-rqi .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-diagram-rqi .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-diagram-rqi .cluster text{fill:#333;}#mermaid-diagram-rqi .cluster span{color:#333;}#mermaid-diagram-rqi div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:var(--font-geist-sans);font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-diagram-rqi .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-diagram-rqi .flowchart-link{stroke:hsl(var(--gray-400));stroke-width:1px;}#mermaid-diagram-rqi .marker,#mermaid-diagram-rqi marker,#mermaid-diagram-rqi marker *{fill:hsl(var(--gray-400))!important;stroke:hsl(var(--gray-400))!important;}#mermaid-diagram-rqi .label,#mermaid-diagram-rqi text,#mermaid-diagram-rqi text>tspan{fill:hsl(var(--black))!important;color:hsl(var(--black))!important;}#mermaid-diagram-rqi .background,#mermaid-diagram-rqi rect.relationshipLabelBox{fill:hsl(var(--white))!important;}#mermaid-diagram-rqi .entityBox,#mermaid-diagram-rqi .attributeBoxEven{fill:hsl(var(--gray-150))!important;}#mermaid-diagram-rqi .attributeBoxOdd{fill:hsl(var(--white))!important;}#mermaid-diagram-rqi .label-container,#mermaid-diagram-rqi rect.actor{fill:hsl(var(--white))!important;stroke:hsl(var(--gray-400))!important;}#mermaid-diagram-rqi line{stroke:hsl(var(--gray-400))!important;}#mermaid-diagram-rqi :root{--mermaid-font-family:var(--font-geist-sans);}前端 (Next.js)API 路由知识库管理聊天处理API 配置PostgreSQL 数据库Upstash Vector 向量数据库LLM API (OpenAI等)
+graph TD
+    A["前端 (Next.js)"] --> B["API 路由"]
+    B --> C["知识库管理"]
+    B --> D["聊天处理"]
+    B --> E["API 配置"]
+    C --> F["PostgreSQL 数据库"]
+    C --> G["Upstash Vector 向量数据库"]
+    D --> F
+    D --> G
+    D --> H["LLM API (OpenAI等)"]
+    E --> F
 ```
 
 ### 主要组件
